@@ -1,0 +1,15 @@
+
+<div class="d-flex flex-column justify-content-center align-items-center my-5">
+<h2 class="h2 fw-bolder">insert your sent code to reset your account password</h2>
+<form  class="w-75 " [formGroup]="verifyCodeForm" (ngSubmit)="handleVerifyCodeForm(verifyCodeForm)">
+<div class="my-3 fw-bolder">
+ <input type="text" formControlName="resetCode" placeholder="Enter your sent Code..." id="resetCode"  class="form-control" >
+ <div *ngIf="(verifyCodeForm.get('resetCode')?.errors)&&(verifyCodeForm.get('resetCode')?.touched)">
+<p class="my-1 py-1 alert alert-danger" *ngIf="verifyCodeForm.get('resetCode')?.getError('pattern')">Code must be 5 or 6 numbers only</p>
+ </div>
+ 
+</div>
+ <div class="my-3 fw-bolder"><p class="alert alert-danger" *ngIf="errorMessage.length>0">{{errorMessage}}</p></div>
+<button type="submit" [disabled]="(verifyCodeForm.status=='INVALID')?true:false" class="btn bg-main text-white cursor-pointer d-block ms-auto"><i *ngIf="isLoading" class="fa-solid fa-spinner fa-spin fa-lg px-5 py-2 "></i><span *ngIf="!isLoading">verify</span></button>
+</form>
+</div>

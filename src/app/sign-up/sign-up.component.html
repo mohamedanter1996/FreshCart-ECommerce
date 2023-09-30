@@ -1,0 +1,59 @@
+<h2 class="h1 fw-bolder">register now</h2>
+
+<form class="my-5" [formGroup]="signUpForm" (ngSubmit)="handleSignUpForm(signUpForm)">
+    <div class="my-3 fw-bolder">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" formControlName="name" placeholder="" id="name"  class="form-control">
+        <div *ngIf="(signUpForm.get('name')?.errors)&&(signUpForm.get('name')?.touched)">
+            <p class="my-1 py-1 alert alert-danger" *ngIf="signUpForm.get('name')?.getError('required')">name is required</p>
+            <p class="my-1 py-1 alert alert-danger" *ngIf="signUpForm.get('name')?.getError('minlength')">name min length is 3</p>
+            <p class="my-1 py-1 alert alert-danger" *ngIf="signUpForm.get('name')?.getError('maxlength')">name max length is 30</p>
+        </div>
+        
+    </div>
+
+    <div class="my-3 fw-bolder">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" formControlName="email" placeholder="" id="email"  class="form-control" (focus)="removeErrorMessage()">
+          <div *ngIf="(signUpForm.get('email')?.errors)&&(signUpForm.get('email')?.touched)">
+            <p class="my-1 py-1 alert alert-danger" *ngIf="signUpForm.get('email')?.getError('required')">email is required</p>
+            <p class="my-1 py-1 alert alert-danger" *ngIf="signUpForm.get('email')?.getError('email')">email is invalid</p>
+        </div>
+         <div><p class="my-1 py-1 alert alert-danger" *ngIf="errorMessage.length>0">{{errorMessage}}</p></div>
+    </div>
+
+    <div class="my-3 fw-bolder">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" formControlName="password" placeholder="" id="password"  class="form-control">
+        <div *ngIf="(signUpForm.get('password')?.errors)&&(signUpForm.get('password')?.touched)||((signUpForm.errors?.['passwordmatcherror'])&&(signUpForm.get('rePassword')?.touched))">
+            <p class="my-1 py-1 alert alert-danger" *ngIf="signUpForm.get('password')?.getError('required')">password is required</p>
+            <p class="my-1 py-1 alert alert-danger" *ngIf="signUpForm.get('password')?.getError('pattern')">password is invalid</p>
+            <p class="my-1 py-1 alert alert-danger" *ngIf="signUpForm.get('password')?.getError('minlength')">password min length is 6</p>
+            <p class="my-1 py-1 alert alert-danger" *ngIf="signUpForm.get('password')?.getError('maxlength')">password max length is 16</p>
+            <p class="my-1 py-1 alert alert-danger" *ngIf="signUpForm.errors?.['passwordmatcherror']">Password doesn't match repassword</p>
+        </div>
+    </div>
+
+    <div class="my-3 fw-bolder">
+        <label for="rePassword" class="form-label">Repassword</label>
+        <input type="password" formControlName="rePassword" placeholder="" id="rePassword"  class="form-control">
+        <div *ngIf="(signUpForm.get('rePassword')?.errors)&&(signUpForm.get('rePassword')?.touched)||((signUpForm.errors?.['passwordmatcherror'])&&(signUpForm.get('rePassword')?.touched))">
+            <p class="my-1 py-1 alert alert-danger" *ngIf="signUpForm.get('rePassword')?.getError('required')">rePassword is required</p>
+            <p class="my-1 py-1 alert alert-danger" *ngIf="signUpForm.get('rePassword')?.getError('pattern')">rePassword is invalid</p>
+            <p class="my-1 py-1 alert alert-danger" *ngIf="signUpForm.get('rePassword')?.getError('minlength')">rePassword min length is 6</p>
+            <p class="my-1 py-1 alert alert-danger" *ngIf="signUpForm.get('rePassword')?.getError('maxlength')">rePassword max length is 16</p>
+            <p class="my-1 py-1 alert alert-danger" *ngIf="signUpForm.errors?.['passwordmatcherror']">rePassword doesn't match password</p>
+        </div>
+    </div>
+
+    <div class="my-3 fw-bolder">
+        <label for="phone" class="form-label">Phone</label>
+        <input type="tel" formControlName="phone" placeholder="" id="phone"  class="form-control">
+        <div *ngIf="(signUpForm.get('phone')?.errors)&&(signUpForm.get('phone')?.touched)">
+            <p class="my-1 py-1 alert alert-danger" *ngIf="signUpForm.get('phone')?.getError('required')">phone is required</p>
+            <p class="my-1 py-1 alert alert-danger" *ngIf="signUpForm.get('phone')?.getError('pattern')">phone is invalid</p>
+        </div>
+       
+    </div>
+    <button [disabled]="(signUpForm.status=='INVALID')||(signUpForm.errors?.['passwordmatcherror'])?true:false" type="submit" class="btn bg-main text-white cursor-pointer d-block ms-auto"><i *ngIf="isLoading" class="fa-solid fa-spinner fa-spin fa-lg px-5 py-2 "></i><span *ngIf="!isLoading"> Register now</span></button>
+</form>
