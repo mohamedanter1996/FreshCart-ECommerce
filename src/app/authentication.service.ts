@@ -4,9 +4,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {UserVerifyCodeData} from './user-verify-code-data';
 
-import{Observable} from'rxjs';
+import{Observable,BehaviorSubject} from'rxjs';
 import { UserSignUpData } from './user-sign-up-data';
 import { UserSignInData } from './user-sign-in-data';
+import jwtDecode from 'jwt-decode';
+
 
 
 
@@ -14,6 +16,7 @@ import { UserSignInData } from './user-sign-in-data';
   providedIn: 'root'
 })
 export class AuthenticationService {
+userData=new BehaviorSubject(null);
 
   constructor(private _HttpClient:HttpClient) { }
 getSignUpUserData(userSignUpData:UserSignUpData):Observable<any>
@@ -30,4 +33,10 @@ getVerifyCodeUserData(userVerifyCodeData:UserVerifyCodeData):Observable<any>
 
 getResetPasswordUserData(userResetPasswordData:UserResetPasswordData):Observable<any>
 {return this._HttpClient.put("https://ecommerce.routemisr.com/api/v1/auth/resetPassword",userResetPasswordData)}
+getTokenUserData(){
+  let encodeToken=JSON.stringify(localStorage.getItem("token"));
+  let decodeTeken:any=jwtDecode(encodeToken);
+  this.userData.next(decodeTeken);
+  console.log(this.userData);
+}
 }

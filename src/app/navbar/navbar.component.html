@@ -7,44 +7,44 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" routerLink="Home" routerLinkActive="link-active">Home</a>
+          <a class="nav-link" aria-current="page" routerLink="Home" *ngIf="isLogIn" routerLinkActive="link-active">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="cart" routerLinkActive="link-active">cart</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" routerLink="wishList" routerLinkActive="link-active">wish list</a>
+          <a class="nav-link" routerLink="cart"*ngIf="isLogIn" routerLinkActive="link-active">cart</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" routerLink="products" routerLinkActive="link-active">products</a>
+          <a class="nav-link" routerLink="wishList" *ngIf="isLogIn" routerLinkActive="link-active">wish list</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" routerLink="categories" routerLinkActive="link-active">categories</a>
+          <a class="nav-link" routerLink="products" *ngIf="isLogIn" routerLinkActive="link-active">products</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" routerLink="brands" routerLinkActive="link-active">brands</a>
+          <a class="nav-link" routerLink="categories" *ngIf="isLogIn" routerLinkActive="link-active">categories</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="brands" *ngIf="isLogIn" routerLinkActive="link-active">brands</a>
         </li>
       </ul>
 
        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" routerLink="register" routerLinkActive="link-active">register</a>
+          <a class="nav-link" routerLink="register" *ngIf="!isLogIn" routerLinkActive="link-active">register</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" routerLink="logIn" routerLinkActive="link-active">log in</a>
+          <a class="nav-link" routerLink="logIn" *ngIf="!isLogIn" routerLinkActive="link-active">log in</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" routerLink="cart"><i class="fa-solid fa-cart-shopping fs-3"></i></a>
+          <a class="nav-link"*ngIf="isLogIn" routerLink="cart"><i class="fa-solid fa-cart-shopping fs-3"></i></a>
         </li>
 
          <li class="nav-item">
-          <a class="nav-link cursor-pointer"  routerLinkActive="link-active">log out</a>
+          <span class="nav-link cursor-pointer"*ngIf="isLogIn" (click)="logout()">log out</span>
         </li>
       </ul>
       

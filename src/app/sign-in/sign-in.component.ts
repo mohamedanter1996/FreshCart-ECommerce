@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import {FormControl,FormGroup,Validators} from '@angular/forms'
 import { AuthenticationService } from '../authentication.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-sign-in',
@@ -10,7 +12,7 @@ import { AuthenticationService } from '../authentication.service';
 export class SignInComponent {
 errorMessage:string="";
   isLoading:boolean=false;
-constructor(private _authenticationService:AuthenticationService){}
+constructor(private _authenticationService:AuthenticationService,private _router:Router){}
 signInForm:FormGroup=new FormGroup({
   email:new FormControl(null,[Validators.email,Validators.required]),
   password:new FormControl(null,[Validators.pattern('^[a-zA-Z0-9!@#$_.]{6,16}$'),Validators.required,Validators.minLength(6),Validators.maxLength(16)])
@@ -22,7 +24,10 @@ console.log(signInForm);
 this._authenticationService.getSignInUserData(signInForm.value).subscribe({
   next:(response)=>{
      this.isLoading=false;
-    console.log(response);
+    console.log(response.token);
+    localStorage.setItem("token",response.token)
+    this._authenticationService.getTokenUserData();
+    this._router.navigate(["/Home"])
   },
   error:(error)=>{
     this.isLoading=false;
