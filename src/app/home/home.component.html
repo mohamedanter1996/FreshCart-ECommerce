@@ -1,1 +1,16 @@
-<p>home works!</p>
+<div class="row my-5 g-5">
+<div class="col-lg-3 col-md-6" *ngFor="let product of products">
+    <div class="item product">
+        <div class="text-center">
+<img [src]="product.imageCover" class="w-100" alt="">
+        </div>
+        <p>{{product.category.name}}</p>
+        <h2>{{product.title}}</h2>
+        <div class="d-flex justify-content-between align-items-center ">
+         <span>{{product.price}} EGp</span>
+         <span><i class="fa fa-star rating-color"></i>{{product.ratingsAverage}}</span>
+        </div>
+         <button class="btn bg-main text-white d-block w-75 mx-auto">+Add</button>
+    </div>
+</div>
+</div>
