@@ -1,6 +1,7 @@
 import { Product } from './../product';
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../products.service';
+import { Router } from '@angular/router';
 
 
 
@@ -12,7 +13,7 @@ import { ProductsService } from '../products.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit{
-constructor(private _productsService:ProductsService){}
+constructor(private _productsService:ProductsService,private _router:Router){}
 products:Product[]=[];
 ngOnInit(): void {
     this._productsService.getAllHomeProduct().subscribe({
@@ -26,4 +27,5 @@ ngOnInit(): void {
       }
     })
 }
+
 }

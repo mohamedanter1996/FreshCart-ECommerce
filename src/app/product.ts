@@ -4,7 +4,7 @@ export interface Product {
     title:string,
     category:category,
     ratingsAverage:number,
-    id:StaticRange
+    _id:string
 }
 
 export interface category {

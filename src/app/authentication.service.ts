@@ -1,6 +1,6 @@
 import { UserResetPasswordData } from './user-reset-password-data';
 import { UserForgetPasswordData } from './user-forget-password-data';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {UserVerifyCodeData} from './user-verify-code-data';
 
@@ -15,10 +15,16 @@ import jwtDecode from 'jwt-decode';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenticationService {
-userData=new BehaviorSubject(null);
-
+export class AuthenticationService implements OnInit {
+userData=new BehaviorSubject(localStorage.getItem("token")==null?null:this.getTokenUserDataDynamic(localStorage.getItem("token")));
   constructor(private _HttpClient:HttpClient) { }
+  ngOnInit(): void {
+this.getTokenUserData();
+  }
+
+ 
+
+
 getSignUpUserData(userSignUpData:UserSignUpData):Observable<any>
 {return this._HttpClient.post("https://ecommerce.routemisr.com/api/v1/auth/signup",userSignUpData)}
 
@@ -39,4 +45,11 @@ getTokenUserData(){
   this.userData.next(decodeTeken);
   console.log(this.userData);
 }
+
+getTokenUserDataDynamic(token:string|null):string|null{
+  let encodeToken=JSON.stringify(token);
+  let decodeTeken:any=jwtDecode(encodeToken);
+  return decodeTeken;
+}
+
 }

@@ -23,7 +23,8 @@ import { FormsModule } from '@angular/forms';
 import{HttpClientModule} from '@angular/common/http';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { VerifyCodeComponent } from './verify-code/verify-code.component';
-import { ResetPasswordComponent } from './reset-password/reset-password.component'
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { DecrementTitlePipe } from './decrement-title.pipe'
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +45,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     WishListComponent,
     ForgetPasswordComponent,
     VerifyCodeComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    DecrementTitlePipe
   ],
   imports: [
     BrowserModule,
