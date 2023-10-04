@@ -25,6 +25,9 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
 import { VerifyCodeComponent } from './verify-code/verify-code.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { DecrementTitlePipe } from './decrement-title.pipe'
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
+import { CarouselModule } from 'ngx-owl-carousel-o';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,7 +56,9 @@ import { DecrementTitlePipe } from './decrement-title.pipe'
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    CarouselModule
   ],
   providers: [],
   bootstrap: [AppComponent]

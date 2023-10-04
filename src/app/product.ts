@@ -13,3 +13,12 @@ export interface category {
    slug:string,
    image:string
 }
+
+export interface specificProduct{
+    images:string[],
+    title:string,
+    description:string,
+    ratingsAverage:number,
+    price:number
+
+}
