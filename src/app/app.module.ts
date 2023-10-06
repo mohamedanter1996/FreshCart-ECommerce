@@ -27,6 +27,9 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { DecrementTitlePipe } from './decrement-title.pipe'
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { ProductSearchPipe } from './product-search.pipe';
+import { ProductsOfCategoyDetailsComponent } from './products-of-categoy-details/products-of-categoy-details.component';
+import { ProductsOfCategoryPipe } from './products-of-category.pipe';
 
 @NgModule({
   declarations: [
@@ -49,7 +52,10 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     ForgetPasswordComponent,
     VerifyCodeComponent,
     ResetPasswordComponent,
-    DecrementTitlePipe
+    DecrementTitlePipe,
+    ProductSearchPipe,
+    ProductsOfCategoyDetailsComponent,
+    ProductsOfCategoryPipe
   ],
   imports: [
     BrowserModule,

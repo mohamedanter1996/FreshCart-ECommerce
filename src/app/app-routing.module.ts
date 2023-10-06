@@ -14,6 +14,7 @@ import { VerifyCodeComponent } from './verify-code/verify-code.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { successLogInGuard } from './success-log-in.guard';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import { ProductsOfCategoyDetailsComponent } from './products-of-categoy-details/products-of-categoy-details.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path:"categories",canActivate:[successLogInGuard],component:CategoriesComponent,title:"categories"},
   {path:"brands",canActivate:[successLogInGuard],component:BrandsComponent,title:"brands"},
   {path:"productDetails/:id",canActivate:[successLogInGuard],component:ProductDetailsComponent,title:"productDetails"},
+  {path:"productsOfCategory/:id",canActivate:[successLogInGuard],component:ProductsOfCategoyDetailsComponent,title:"products"},
   {path:"register",component:SignUpComponent,title:"register"},
   {path:"logIn",component:SignInComponent,title:"logIn"},
   {path:"forget-Password",component:ForgetPasswordComponent,title:"forget-Password"},

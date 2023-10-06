@@ -5,9 +5,13 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class DecrementTitlePipe implements PipeTransform {
 
-  transform(title: string): string {
-title.split(" ").slice(0,2).join(" ")
-    return title.split(" ").slice(0,2).join(" ");
+  transform(title: string,productSearch?:string): string {
+if(productSearch){
+   return title;
+}else{
+return title.split(" ").slice(0,2).join(" ");
+}
+    
   }
 
 }
