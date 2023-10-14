@@ -57,3 +57,13 @@ a , a:hover{
 {
     background-color: var(--light-color) !important;
 }
+
+.loader-container{
+  
+    background-color: black;
+    opacity: 0.8;
+    z-index: 99;
+}
+.mat-mdc-progress-spinner { --mdc-circular-progress-active-indicator-color: #0aad0a; }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -1,1 +1,41 @@
-<p>check-out-form works!</p>
+<div class="loader-container position-fixed top-0 bottom-0 start-0 end-0" *ngIf="this._loaderService.isLoading |async">
+<mat-progress-spinner mode="indeterminate" class="top-50 start-50"></mat-progress-spinner>
+</div>
+
+<form class="mt-10" [formGroup]="checkOutForm" (ngSubmit)="handleCheckOutForm(checkOutForm)">
+<div class="form-floating mb-3">
+  <input type="text" class="form-control" id="name" placeholder="name" formControlName="name">
+  <label for="name" class="fw-bolder">name</label>
+   <div *ngIf="(checkOutForm.get('name')?.errors)&&(checkOutForm.get('name')?.touched)">
+            <p class="my-1 py-1 alert alert-danger" *ngIf="checkOutForm.get('name')?.getError('required')">name is required</p>
+            <p class="my-1 py-1 alert alert-danger" *ngIf="checkOutForm.get('name')?.getError('minlength')">name min length is 3</p>
+            <p class="my-1 py-1 alert alert-danger" *ngIf="checkOutForm.get('name')?.getError('maxlength')">name max length is 30</p>
+        </div>
+</div>    
+<div class="form-floating mb-3">
+  <input type="text" class="form-control" id="Details" placeholder="Address" formControlName="details">
+  <label for="Details" class="fw-bolder">Address</label>
+    <div *ngIf="(checkOutForm.get('details')?.errors)&&(checkOutForm.get('details')?.touched)">
+            <p class="my-1 py-1 alert alert-danger" *ngIf="checkOutForm.get('details')?.getError('required')">name is required</p>
+            
+        </div>
+</div>
+<div class="form-floating mb-3">
+  <input type="tel" class="form-control" id="phone" placeholder="phone" formControlName="phone">
+  <label for="phone" class="fw-bolder">Phone</label>
+   <div *ngIf="(checkOutForm.get('phone')?.errors)&&(checkOutForm.get('phone')?.touched)">
+            <p class="my-1 py-1 alert alert-danger" *ngIf="checkOutForm.get('phone')?.getError('required')">phone is required</p>
+            <p class="my-1 py-1 alert alert-danger" *ngIf="checkOutForm.get('phone')?.getError('pattern')">phone is invalid</p>
+        </div>
+</div>
+
+<div class="form-floating mb-3">
+  <input type="text" class="form-control" id="city" placeholder="city" formControlName="city">
+  <label for="city" class="fw-bolder">City</label>
+   <div *ngIf="(checkOutForm.get('city')?.errors)&&(checkOutForm.get('city')?.touched)">
+            <p class="my-1 py-1 alert alert-danger" *ngIf="checkOutForm.get('city')?.getError('required')">city is required</p>
+            <p class="my-1 py-1 alert alert-danger" *ngIf="checkOutForm.get('city')?.getError('pattern')">city min length is 4 and max length is 31 and first character must be capital</p>
+        </div>
+</div>
+<button type="submit" [disabled]="!checkOutForm.valid" class="btn bg-main text-white cursor-pointer d-block ms-auto">Go To Payment Method</button>
+</form>

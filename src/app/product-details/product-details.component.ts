@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ProductsService } from '../products.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { CartService } from '../cart.service';
+import { LoaderService } from '../loader.service';
 
 @Component({
   selector: 'app-product-details',
@@ -13,7 +15,7 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 export class ProductDetailsComponent implements OnInit {
 productId:string|null="";
 specificProduct:specificProduct={} as specificProduct
-constructor(private _activatedRoute:ActivatedRoute,private _productsService:ProductsService){}
+constructor(private _activatedRoute:ActivatedRoute,private _productsService:ProductsService,private _cartService:CartService,public _loaderService:LoaderService){}
 ngOnInit(): void {
     this._activatedRoute.paramMap.subscribe((param)=>{
       console.log(param.get("id"));
@@ -26,7 +28,8 @@ this.specificProduct={
   title:response.data.title,
   description:response.data.description,
   ratingsAverage:response.data.ratingsAverage,
-  price:response.data.price
+  price:response.data.price,
+  _id:response.data._id
 }
 console.log(this.specificProduct.images);
 
@@ -38,7 +41,16 @@ error:(error)=>{
     })
 
 }
-
+addProductToCart(productId:string){
+  this._cartService.addProductToCart(productId).subscribe({
+    next:(response)=>{
+      console.log(response)
+    },
+    error:(error)=>{
+      console.log(error);
+    }
+  })
+}
 customOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,

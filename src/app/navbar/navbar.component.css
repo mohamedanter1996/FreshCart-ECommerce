@@ -7,3 +7,15 @@ span:hover{
     color: black;
     font-weight: bolder;
 }
+.badge{
+    top: -50%;
+    right: -50%;
+    color: white;
+    background-color: var(--main-color);
+}
+
+.badge:hover{
+    color:var(--main-color);
+    background-color: transparent;
+    border: solid 2px var(--main-color);
+}

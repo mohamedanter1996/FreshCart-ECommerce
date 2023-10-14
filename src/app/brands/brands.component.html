@@ -1,3 +1,9 @@
+
+
+<div class="loader-container position-fixed top-0 bottom-0 start-0 end-0" *ngIf="this._loaderService.isLoading |async">
+<mat-progress-spinner mode="indeterminate" class="top-50 start-50"></mat-progress-spinner>
+</div>
+
 <div class="row gy-4 my-10">
   <div class="col-md-4" *ngFor="let brand of brands">
      <a [routerLink]="['/productsOfCategory',brand._id]">
@@ -9,6 +15,7 @@
 </div>
      </a>
 
+     
 
   </div>
 </div>

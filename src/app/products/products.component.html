@@ -1,12 +1,17 @@
+
+<div class="loader-container position-fixed top-0 bottom-0 start-0 end-0" *ngIf="this._loaderService.isLoading |async">
+<mat-progress-spinner mode="indeterminate" class="top-50 start-50"></mat-progress-spinner>
+</div>
 <div class="form-floating mt-10">
     <input type="text" class="form-control"  [(ngModel)]="productSearch" placeholder="Search for any Product you wont ..." id="searchProduct">
     <label for="searchProduct"><i class="fa-solid fa-magnifying-glass"></i> Search for any Product you wont ...</label>
 </div>
 
 <div class="row my-3 g-5">
-<div class="col-lg-3 col-md-6" *ngFor="let product of products|productSearch:productSearch">
-    <a [routerLink]="['/productDetails',product._id]">
+<div class="col-lg-3 col-md-6" *ngFor="let product of products|productSearch:productSearch;let i=index">
+    
 <div class="item product p-1 cursor-pointer">
+    <a [routerLink]="['/productDetails',product._id]">
         <div class="text-center">
 <img [src]="product.imageCover" class="w-100" alt="">
         </div>
@@ -16,9 +21,12 @@
          <span>{{product.price}} EGp</span>
          <span><i class="fa fa-star rating-color"></i>{{product.ratingsAverage}}</span>
         </div>
-         <button class="btn bg-main text-white d-block w-75 mx-auto">+Add</button>
+        </a>
+       <p-toast [showTransitionOptions]="'1000ms'" [life]=1500 [hideTransitionOptions]="'1000ms'" ></p-toast>
+<i (click)="show(product._id,i)" label="Show"  class="fa-solid fa-heart cursor-pointer fa-2x d-block w-25 text-end ms-auto p-button-success" [ngClass]="{'wish-list-product-visited':checkIdExestInWishList(product._id)}" id="liveToastBtn"></i>
+         <button class="btn bg-main text-white d-block w-75 mx-auto" (click)="addProductToCart(product._id)">+Add</button>
     </div>
-    </a>
+   
     
 </div>
 </div>

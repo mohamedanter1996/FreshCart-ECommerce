@@ -8,6 +8,13 @@ export interface Product {
     brand:brand
 }
 
+export interface cartProduct{
+    count:number,
+    price:number,
+    product:Product
+
+
+}
 export interface category {
    _id:string,
    name:string,
@@ -20,8 +27,8 @@ export interface specificProduct{
     title:string,
     description:string,
     ratingsAverage:number,
-    price:number
-
+    price:number,
+_id:string
 }
 
 export interface productCategories{
@@ -38,3 +45,22 @@ export interface brand{
     slug:string,
     image:string
 }
+
+export interface userAddress{
+    name?:string,
+    details:string,
+    phone:string,
+    city:string,
+    _id?:string
+}
+
+export interface orderData{
+    paymentMethodType:string,
+    totalOrderPrice:number,
+    cartItems:cartProduct[]
+
+
+}
+
+
+

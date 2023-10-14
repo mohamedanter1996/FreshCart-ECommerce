@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {FormControl,FormGroup,Validators} from '@angular/forms'
 import { AuthenticationService } from '../authentication.service';
 import { Router } from '@angular/router';
+import { LoaderService } from '../loader.service';
 
 @Component({
   selector: 'app-forget-password',
@@ -12,7 +13,7 @@ export class ForgetPasswordComponent {
   messageType:string="";
   statusMessage:string="";
   isLoading:boolean=false;
-  constructor(private _authenticationService: AuthenticationService,private _router:Router){}
+  constructor(private _authenticationService: AuthenticationService,private _router:Router,public _loaderService:LoaderService){}
 forgetPasswordForm:FormGroup=new FormGroup({
   email:new FormControl(null,[Validators.email,Validators.required])
 })

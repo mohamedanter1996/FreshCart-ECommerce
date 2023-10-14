@@ -1,0 +1,17 @@
+<div class="loader-container position-fixed top-0 bottom-0 start-0 end-0" *ngIf="this._loaderService.isLoading |async">
+<mat-progress-spinner mode="indeterminate" class="top-50 start-50"></mat-progress-spinner>
+</div>
+<div class="d-flex align-items-center justify-content-center w-100 vh-100">
+<div class="row mt-10 w-100 g-2">
+    <div class="col-md-6 ">
+        <button class="btn bg-main text-white d-block mx-auto w-100" (click)="createCashOrder()"><i class="fa-solid fa-money-bill-wave fa-beat" ></i><span class="ms-5">Cash On Delivery</span></button>
+    </div>
+      <div class="col-md-6">
+        <button class="btn bg-main text-white d-block mx-auto w-100" (click)="checkOutSession()"><i class="fa-solid fa-credit-card fa-beat" ></i><span class="ms-5">Online Payment</span></button>
+    </div>
+</div>
+</div>
+
+
+
+

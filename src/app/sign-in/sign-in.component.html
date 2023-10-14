@@ -1,3 +1,7 @@
+
+<div class="loader-container position-fixed top-0 bottom-0 start-0 end-0" *ngIf="this._loaderService.isLoading |async">
+<mat-progress-spinner mode="indeterminate" class="top-50 start-50"></mat-progress-spinner>
+</div>
 <h2 class="h1 fw-bolder">login now</h2>
 <form class="my-5" [formGroup]="signInForm" (ngSubmit)="handleSignInForm(signInForm)">
     <div class="my-3 fw-bolder">

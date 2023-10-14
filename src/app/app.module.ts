@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { ToastModule } from 'primeng/toast';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
@@ -20,7 +20,7 @@ import { FooterComponent } from './footer/footer.component';
 import { WishListComponent } from './wish-list/wish-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-import{HttpClientModule} from '@angular/common/http';
+import{HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { VerifyCodeComponent } from './verify-code/verify-code.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
@@ -30,6 +30,10 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { ProductSearchPipe } from './product-search.pipe';
 import { ProductsOfCategoyDetailsComponent } from './products-of-categoy-details/products-of-categoy-details.component';
 import { ProductsOfCategoryPipe } from './products-of-category.pipe';
+import { PaymentMethodsComponent } from './payment-methods/payment-methods.component';
+import { AllordersComponent } from './allorders/allorders.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { IntersiptorService } from './intersiptor.service';
 
 @NgModule({
   declarations: [
@@ -55,7 +59,10 @@ import { ProductsOfCategoryPipe } from './products-of-category.pipe';
     DecrementTitlePipe,
     ProductSearchPipe,
     ProductsOfCategoyDetailsComponent,
-    ProductsOfCategoryPipe
+    ProductsOfCategoryPipe,
+    PaymentMethodsComponent,
+    AllordersComponent,
+  
   ],
   imports: [
     BrowserModule,
@@ -64,9 +71,13 @@ import { ProductsOfCategoryPipe } from './products-of-category.pipe';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    CarouselModule
+    CarouselModule,
+    ToastModule,
+      MatProgressSpinnerModule
   ],
-  providers: [],
+  providers: [
+    {provide:HTTP_INTERCEPTORS,useClass:IntersiptorService,multi:true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

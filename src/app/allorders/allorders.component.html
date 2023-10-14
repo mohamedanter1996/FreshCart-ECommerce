@@ -1,0 +1,30 @@
+<div class="loader-container position-fixed top-0 bottom-0 start-0 end-0" *ngIf="this._loaderService.isLoading |async">
+<mat-progress-spinner mode="indeterminate" class="top-50 start-50"></mat-progress-spinner>
+</div>
+
+<div class="h1 fw-bolder mt-10 mx-auto" *ngIf="ordersList.length==0">No Orders Found</div>
+
+<div class="mt-10" *ngIf="ordersList.length>0">
+    <div class="item my-2 border-1  border-bottom bg-light" *ngFor="let orderList of ordersList;let i=index"> 
+        <div class="fw-bolder h3 my-1"> <span class="border-1  border-bottom border-success">Order Number:{{i+1}}</span> </div>
+        <h2 class="fw-bolder my-1">Total Price: <span class="text-main">{{orderList.totalOrderPrice |currency:'EGP':'symbol-narrow'}}</span></h2>
+        <P class="fw-bolder h3 my-1">payment Method Type: <span class="text-main"> {{orderList.paymentMethodType}}</span></P>
+         <P class="fw-bolder h3 my-1">Cart Items Number: <span class="text-main"> {{orderList.cartItems.length}}</span></P>
+        <owl-carousel-o [options]="customOptions" >
+    <ng-container *ngFor="let cartItem of orderList.cartItems">
+      <ng-template carouselSlide >
+        <div class="row">
+            <div class="col" >
+                <img [src]="cartItem.product.imageCover" [ngClass]="{'w-100':orderList.cartItems.length>3,'w-25':orderList.cartItems.length==1,'w-50':orderList.cartItems.length==2,'w-75':orderList.cartItems.length==3}"  alt={{cartItem.product.title}} [title]="cartItem.product.title">
+       <h5 class="fw-bolder">{{cartItem.product.title}}</h5>
+        <p class="fw-bolder">Price:{{cartItem.price|currency:'EGP':'symbol-narrow'}}</p>
+            </div>
+        </div>
+        
+      </ng-template>
+
+    </ng-container>
+
+  </owl-carousel-o>
+</div></div>
+   

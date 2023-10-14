@@ -1,3 +1,16 @@
 .mt-10{
     margin-top: 100px;
 }
+
+.wish-list-product-visited{
+color: red;
+}
+
+.loader-container{
+  
+    background-color: black;
+    opacity: 0.8;
+    z-index: 99;
+}
+
+  .mat-mdc-progress-spinner { --mdc-circular-progress-active-indicator-color: #0aad0a; }

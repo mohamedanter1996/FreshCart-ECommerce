@@ -1,3 +1,7 @@
+
+<div class="loader-container position-fixed top-0 bottom-0 start-0 end-0" *ngIf="this._loaderService.isLoading |async">
+<mat-progress-spinner mode="indeterminate" class="top-50 start-50"></mat-progress-spinner>
+</div>
 <div class="row d-flex justify-content-center align-items-center">
     <div class="col-md-4">
      
@@ -27,6 +31,6 @@
         </div>
         </div>
        
-<button class="btn bg-main text-white d-block w-100 mx-auto">+Add</button>
+<button class="btn bg-main text-white d-block w-100 mx-auto" (click)="addProductToCart(specificProduct._id)">+Add</button>
     </div>
 </div>

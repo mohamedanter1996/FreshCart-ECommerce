@@ -1,1 +1,40 @@
-<p>cart works!</p>
+
+<div class="loader-container position-fixed top-0 bottom-0 start-0 end-0" *ngIf="this._loaderService.isLoading |async">
+<mat-progress-spinner mode="indeterminate" class="top-50 start-50"></mat-progress-spinner>
+</div>
+<div class="bg-main-light bg-opacity-10 p-5 cart">
+<div class="d-flex justify-content-between align-items-center mt-10">
+    <h2 class="h1 fw-bolder text-main">Cart Shop</h2>
+    <button class="btn bg-main text-white" routerLink="/checkOut" *ngIf="totalNumberOfItems>0" [disabled]="cartId==''" ><a class="bg-main text-white" [routerLink]="['/check-out',cartId]">check out</a></button>
+</div>
+
+<div class="d-flex justify-content-between align-items-center my-2">
+    <div class="mx-auto" *ngIf="totalNumberOfItems==0"><p class="h1 fw-bolder">your cart is empty</p></div>
+<h5 class="fw-bolder" *ngIf="totalNumberOfItems>0">total price:<span class="text-main">{{totalPrice|currency:'EGP'}}</span></h5>
+<h5 class="fw-bolder" *ngIf="totalNumberOfItems>0">total number of items:<span class="text-main">{{totalNumberOfItems}}</span></h5>
+</div>
+
+<div class="row align-items-center my-1 border-bottom pb-1"  *ngFor="let cartProduct of cartProducts">
+    <div class="col-md-2">
+        <div>
+            <img [src]="cartProduct.product.imageCover" class="w-100" alt="{{cartProduct.product.title}}">
+        </div>
+    </div>
+    <div class="col-md-10">
+        <div class="d-flex justify-content-between align-items-center">
+        <div class="item-title-price-remove">
+            <h5>{{cartProduct.product.title}}</h5>
+            <h6>{{cartProduct.price|currency:'EGP'}}</h6>
+            <button class="btn btn-danger" (click)="removeSpecificCartProduct(cartProduct.product._id)"><i class="fa-regular fa-trash-can"></i><span class="fw-bolder ps-2">remove</span></button>
+        </div>
+        <div class="item-add-subtract">
+            <button class="btn border-main text-main fs-5 fw-bolder" (click)="updateCartProductQuantity(cartProduct.product._id,cartProduct.count+1)">+</button>
+            <span class="mx-2 text-main fs-5 fw-bolder">{{cartProduct.count}}</span>
+            <button class="btn border-main text-main fs-5 fw-bolder" (click)="updateCartProductQuantity(cartProduct.product._id,cartProduct.count-1)">-</button>
+        </div>
+        </div>
+    </div>
+</div>
+<button class="btn bg-transparent text-main border-main d-block mx-auto fw-bolder mt-4" *ngIf="totalNumberOfItems>0" (click)="clearUserCart()">Clear Your Cart</button>
+</div>
+

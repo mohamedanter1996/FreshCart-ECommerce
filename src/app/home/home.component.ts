@@ -1,8 +1,13 @@
+import { WishListService } from './../wish-list.service';
 import { Product, productCategories } from './../product';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ProductsService } from '../products.service';
 import { Router } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { CartService } from '../cart.service';
+
+import { MessageService } from 'primeng/api';
+import { LoaderService } from '../loader.service';
 declare var anime: any;     
 
 
@@ -10,11 +15,15 @@ declare var anime: any;
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+    providers: [MessageService]
 })
 export class HomeComponent implements OnInit,AfterViewInit{
-constructor(private _productsService:ProductsService,private _router:Router){}
-productSearch:string=""
+constructor(private _productsService:ProductsService,private _router:Router,private _cartService:CartService,private _wishListService:WishListService,private messageService: MessageService,public _loaderService:LoaderService){}
+
+wishListIdsList:string[]=[];
+wishListMessage:string="";
+productSearch:string="";
 products:Product[]=[];
 productCategories:productCategories[]=[];
 ngAfterViewInit(): void {
@@ -40,16 +49,20 @@ anime.timeline({loop: true})
 
 }
 ngOnInit(): void {
+
+  this.wishListIdsList=JSON.parse(localStorage.getItem("wishListIdsList")!);
+
     this._productsService.getAllHomeProduct().subscribe({
       next:(response)=>{
         console.log(response.data);
         this.products=response.data;
-       
+     
       },
       error:(error)=>{
         console.log(error);
       }
     })
+   
     this._productsService.getProductCategories().subscribe({
       next:(response)=>{
         console.log(response.data);
@@ -60,6 +73,48 @@ ngOnInit(): void {
       }
     })
 }
+addProductToCart(productId:string){
+  this._cartService.addProductToCart(productId).subscribe({
+    next:(response)=>{
+      console.log(response);
+      console.log(response.numOfCartItems);
+      this._cartService.cartProductQuantity.next(response.numOfCartItems);
+      localStorage.setItem("numOfCartItems",response.numOfCartItems);
+      this._cartService.cartId.next(response.data._id);
+    },
+    error:(error)=>{
+      console.log(error);
+    }
+  })
+}
+
+addProductToWishList(productId:string){
+this._wishListService.addProductToWishList(productId).subscribe({
+  next:(response)=>{
+    console.log(response);
+this.wishListMessage=response.message;
+console.log(response.data);
+this.wishListIdsList=response.data;
+localStorage.setItem("wishListIdsList",JSON.stringify(this.wishListIdsList));
+
+
+
+  },
+  error:(error)=>{
+    console.log(error);
+  }
+})
+}
+
+checkIdExestInWishList(productId:string):boolean{
+ return this.wishListIdsList?.filter((wishListId:any)=>{return wishListId==productId}).length>0?true:false;
+}
+
+show(productId:string,index:number) {
+  this.addProductToWishList(productId)
+
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: this.wishListMessage==""? `Product added successfully to your wishlist`:this.wishListMessage });
+    }
 
 customOptions: OwlOptions = {
     loop: true,
@@ -102,13 +157,13 @@ customOptions: OwlOptions = {
     navText: ['', ''],
     responsive: {
       0: {
-        items: 6
+        items: 1
       },
       400: {
-        items: 6
+        items: 2
       },
       740: {
-        items: 6
+        items: 4
       },
       940: {
         items: 6

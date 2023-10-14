@@ -3,6 +3,7 @@ import {FormControl,FormGroup,Validators} from '@angular/forms'
 import { matchpassword } from '../confermation.validator';
 import { AuthenticationService } from '../authentication.service';
 import { Router } from '@angular/router';
+import { LoaderService } from '../loader.service';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { Router } from '@angular/router';
 export class SignUpComponent {
 errorMessage:string="";
 isLoading:boolean=false;
-constructor(private _authenticationService:AuthenticationService,private _router:Router){}
+constructor(private _authenticationService:AuthenticationService,private _router:Router,public _loaderService:LoaderService){}
 signUpForm:FormGroup=new FormGroup({
   name:new FormControl(null,[Validators.required,Validators.minLength(3),Validators.maxLength(30)]),
   email:new FormControl(null,[Validators.email,Validators.required]),

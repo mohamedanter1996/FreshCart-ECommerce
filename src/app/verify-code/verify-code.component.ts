@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {FormControl,FormGroup,Validators} from '@angular/forms'
 import { AuthenticationService } from '../authentication.service';
 import { Router } from '@angular/router';
+import { LoaderService } from '../loader.service';
 
 @Component({
   selector: 'app-verify-code',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 export class VerifyCodeComponent {
   errorMessage:string="";
    isLoading:boolean=false;
- constructor(private _authenticationService: AuthenticationService,private _router:Router){}
+ constructor(private _authenticationService: AuthenticationService,private _router:Router,public _loaderService:LoaderService){}
  verifyCodeForm:FormGroup=new FormGroup({
   resetCode:new FormControl(null,[Validators.pattern(/^[0-9]{5,6}$/),Validators.required])
 })

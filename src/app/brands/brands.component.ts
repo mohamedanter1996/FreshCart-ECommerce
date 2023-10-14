@@ -1,6 +1,7 @@
 import { Product,brand } from './../product';
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../products.service';
+import { LoaderService } from '../loader.service';
 
 
 @Component({
@@ -10,7 +11,7 @@ import { ProductsService } from '../products.service';
 })
 export class BrandsComponent implements OnInit{
 brands:brand[]=[];
-constructor(private _productsService:ProductsService){}
+constructor(private _productsService:ProductsService, public _loaderService:LoaderService){}
 ngOnInit(): void {
   this._productsService.productIdType.next("brand");
     this._productsService.getAllBrands().subscribe({

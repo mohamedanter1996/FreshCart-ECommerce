@@ -1,3 +1,7 @@
+<div class="loader-container position-fixed top-0 bottom-0 start-0 end-0" *ngIf="this._loaderService.isLoading |async">
+<mat-progress-spinner mode="indeterminate" class="top-50 start-50"></mat-progress-spinner>
+</div>
+
 <h2 class="h1 fw-bolder">register now</h2>
 
 <form class="my-5" [formGroup]="signUpForm" (ngSubmit)="handleSignUpForm(signUpForm)">
@@ -27,7 +31,7 @@
         <input type="password" formControlName="password" placeholder="" id="password"  class="form-control">
         <div *ngIf="(signUpForm.get('password')?.errors)&&(signUpForm.get('password')?.touched)||((signUpForm.errors?.['passwordmatcherror'])&&(signUpForm.get('rePassword')?.touched))">
             <p class="my-1 py-1 alert alert-danger" *ngIf="signUpForm.get('password')?.getError('required')">password is required</p>
-            <p class="my-1 py-1 alert alert-danger" *ngIf="signUpForm.get('password')?.getError('pattern')">password is invalid</p>
+            <p class="my-1 py-1 alert alert-danger" *ngIf="signUpForm.get('password')?.getError('pattern')">password is invalid it must contains numbers , small/capital characters and some special characters like!@#$_.</p>
             <p class="my-1 py-1 alert alert-danger" *ngIf="signUpForm.get('password')?.getError('minlength')">password min length is 6</p>
             <p class="my-1 py-1 alert alert-danger" *ngIf="signUpForm.get('password')?.getError('maxlength')">password max length is 16</p>
             <p class="my-1 py-1 alert alert-danger" *ngIf="signUpForm.errors?.['passwordmatcherror']">Password doesn't match repassword</p>
@@ -39,7 +43,7 @@
         <input type="password" formControlName="rePassword" placeholder="" id="rePassword"  class="form-control">
         <div *ngIf="(signUpForm.get('rePassword')?.errors)&&(signUpForm.get('rePassword')?.touched)||((signUpForm.errors?.['passwordmatcherror'])&&(signUpForm.get('rePassword')?.touched))">
             <p class="my-1 py-1 alert alert-danger" *ngIf="signUpForm.get('rePassword')?.getError('required')">rePassword is required</p>
-            <p class="my-1 py-1 alert alert-danger" *ngIf="signUpForm.get('rePassword')?.getError('pattern')">rePassword is invalid</p>
+            <p class="my-1 py-1 alert alert-danger" *ngIf="signUpForm.get('rePassword')?.getError('pattern')">rePassword is invalid it must contains numbers , small/capital characters and some special characters like !@#$_.</p>
             <p class="my-1 py-1 alert alert-danger" *ngIf="signUpForm.get('rePassword')?.getError('minlength')">rePassword min length is 6</p>
             <p class="my-1 py-1 alert alert-danger" *ngIf="signUpForm.get('rePassword')?.getError('maxlength')">rePassword max length is 16</p>
             <p class="my-1 py-1 alert alert-danger" *ngIf="signUpForm.errors?.['passwordmatcherror']">rePassword doesn't match password</p>
@@ -51,7 +55,7 @@
         <input type="tel" formControlName="phone" placeholder="" id="phone"  class="form-control">
         <div *ngIf="(signUpForm.get('phone')?.errors)&&(signUpForm.get('phone')?.touched)">
             <p class="my-1 py-1 alert alert-danger" *ngIf="signUpForm.get('phone')?.getError('required')">phone is required</p>
-            <p class="my-1 py-1 alert alert-danger" *ngIf="signUpForm.get('phone')?.getError('pattern')">phone is invalid</p>
+            <p class="my-1 py-1 alert alert-danger" *ngIf="signUpForm.get('phone')?.getError('pattern')">phone is invalid is not in egyption number rules</p>
         </div>
        
     </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../products.service';
 import { productCategories } from '../product';
+import { LoaderService } from '../loader.service';
 
 
 @Component({
@@ -10,7 +11,7 @@ import { productCategories } from '../product';
 })
 export class CategoriesComponent implements OnInit{
   categories:productCategories[]=[];
-constructor(private _productsService:ProductsService){}
+constructor(private _productsService:ProductsService,public _loaderService:LoaderService){}
 ngOnInit(): void {
   this._productsService.productIdType.next("category");
     this._productsService.getProductCategories().subscribe({
